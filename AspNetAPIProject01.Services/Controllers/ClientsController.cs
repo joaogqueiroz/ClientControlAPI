@@ -42,5 +42,104 @@ namespace AspNetAPIProject01.Services.Controllers
                 return StatusCode(500);
             }
         }
+        [HttpGet]
+        public IActionResult Get()
+        {
+            try
+            {
+
+                var clients = _clientRepository.Read();
+
+                return Ok(clients);
+
+            }
+            catch (Exception e)
+            {
+                //HTTP status 500 - Internal Server Error
+                return StatusCode(500);
+            }
+        }
+        [HttpPut]
+        public IActionResult Put(ClientEditModel model)
+        {
+            try
+            {
+                if (_clientRepository.getByID(model.ClientID) != null)
+                {
+                    //create client object
+                    var client = new Client();
+                    client.ClientID = model.ClientID;
+                    client.Name = model.Name;
+                    client.Email = model.Email;
+
+                    _clientRepository.Update(client);
+
+                    return Ok($"Client {client.Name}, was updated successfully");
+                }
+                else
+                {
+                    //HTTP status 422 - Unprocessable Entity
+                    return UnprocessableEntity(@"The client is not registered on system, please verify the informed id");
+                }
+                
+
+            }
+            catch (Exception e)
+            {
+                //HTTP status 500 - Internal Server Error
+                return StatusCode(500);
+            }
+        }
+        [HttpDelete("{clientID:Guid}")]
+        public IActionResult Delete(Guid clientID)
+        {
+            try
+            {
+                var client = _clientRepository.getByID(clientID);
+                if (client != null)
+                {
+                    //create client object
+                    client.ClientID = clientID;
+
+                    _clientRepository.Delete(client);
+
+                    return Ok($"Client {client.Name}, was deleted successfully");
+
+                }
+                else
+                {
+                    //HTTP status 422 - Unprocessable Entity
+                    return UnprocessableEntity(@"The client is not registered on system, please verify the informed id");
+                }
+            }
+            catch (Exception e)
+            {
+                //HTTP status 500 - Internal Server Error
+                return StatusCode(500);
+            }
+        }        
+        [HttpGet("{clientID:Guid}")]
+        public IActionResult GetByID(Guid clientID)
+        {
+            try
+            {
+                if (_clientRepository.getByID(clientID) != null)
+                {
+                    var client = _clientRepository.getByID(clientID);
+
+                    return Ok(client);
+                }
+                else
+                {
+                    //HTTP status 422 - Unprocessable Entity
+                    return UnprocessableEntity(@"The client is not registered on system, please verify the informed id");
+                }
+            }
+            catch (Exception e)
+            {
+                //HTTP status 500 - Internal Server Error
+                return StatusCode(500);
+            }
+        }
     }
 }

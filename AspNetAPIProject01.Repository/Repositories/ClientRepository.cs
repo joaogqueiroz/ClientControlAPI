@@ -52,6 +52,7 @@ namespace AspNetAPIProject01.Data.Repositories
         {
                 var query = @"
                 UPDATE CLIENT_TB
+                SET
                     NAME = @Name,
                     EMAIL = @Email
                 WHERE CLIENTID = @ClientID";
