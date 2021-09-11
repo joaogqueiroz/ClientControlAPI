@@ -11,9 +11,11 @@ namespace AspNetAPIProject01.Data.Interfaces
     {
         void Create(Client client);
         List<Client> Read();
+        List<Client> Read(DateTime startDate, DateTime finishDate);
         void Update(Client client);
         void Delete(Client client);
         Client getByID(Guid clientID);
+
 
     }
 }

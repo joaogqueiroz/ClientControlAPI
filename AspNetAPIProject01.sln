@@ -7,9 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Services Layer", "1 - S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Repository Layer", "2 - Repository Layer", "{3D09E69F-AEC5-45B4-B042-E7C0C9C3CEB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetAPIProject01.Services", "AspNetAPIProject01.Services\AspNetAPIProject01.Services.csproj", "{A140C1DD-943B-4C12-9A33-3E797EC82E57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetAPIProject01.Services", "AspNetAPIProject01.Services\AspNetAPIProject01.Services.csproj", "{A140C1DD-943B-4C12-9A33-3E797EC82E57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetAPIProject01.Data", "AspNetAPIProject01.Repository\AspNetAPIProject01.Data.csproj", "{0A173867-7630-43E1-A171-980BFA2D3046}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetAPIProject01.Data", "AspNetAPIProject01.Repository\AspNetAPIProject01.Data.csproj", "{0A173867-7630-43E1-A171-980BFA2D3046}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Report Layer", "3 - Report Layer", "{4A6D820A-6133-4432-96B3-74088F51DD9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApsNetAPIProject01.Reports", "ApsNetAPIProject01.Reports\ApsNetAPIProject01.Reports.csproj", "{AEFAD2C9-A190-4D89-A603-E43B604268CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{0A173867-7630-43E1-A171-980BFA2D3046}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A173867-7630-43E1-A171-980BFA2D3046}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A173867-7630-43E1-A171-980BFA2D3046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEFAD2C9-A190-4D89-A603-E43B604268CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEFAD2C9-A190-4D89-A603-E43B604268CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEFAD2C9-A190-4D89-A603-E43B604268CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEFAD2C9-A190-4D89-A603-E43B604268CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A140C1DD-943B-4C12-9A33-3E797EC82E57} = {A86A14FA-1AAC-45C4-A463-DFE79D04AAF6}
 		{0A173867-7630-43E1-A171-980BFA2D3046} = {3D09E69F-AEC5-45B4-B042-E7C0C9C3CEB8}
+		{AEFAD2C9-A190-4D89-A603-E43B604268CE} = {4A6D820A-6133-4432-96B3-74088F51DD9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA645198-AC1E-4040-B35C-651C0EC362EA}

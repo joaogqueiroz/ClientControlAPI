@@ -1,15 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
+    <PackageReference Include="itext7" Version="7.1.16" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ApsNetAPIProject01.Reports\ApsNetAPIProject01.Reports.csproj" />
     <ProjectReference Include="..\AspNetAPIProject01.Repository\AspNetAPIProject01.Data.csproj" />
   </ItemGroup>
 

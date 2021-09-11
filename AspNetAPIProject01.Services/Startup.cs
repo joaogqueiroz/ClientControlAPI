@@ -36,7 +36,7 @@ namespace AspNetAPIProject01.Services
             //Dependency injection
             services.AddTransient<IClientRepository, ClientRepository>(map => new ClientRepository(connectionstring));
 
-            //Configure api documentation(swagger)
+            //Configure API documentation(swagger)
             services.AddSwaggerGen(
                 swagger => 
                 {
@@ -55,6 +55,17 @@ namespace AspNetAPIProject01.Services
                 }
                 );
 
+            //Configure CORS
+            services.AddCors(
+                s => s.AddPolicy("DefaultPolicy", builder => 
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+
+                    })
+                );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +80,8 @@ namespace AspNetAPIProject01.Services
             app.UseSwaggerUI( s=> { s.SwaggerEndpoint("/swagger/v1/swagger.json", "Client Control"); });
 
             app.UseRouting();
+
+            app.UseCors("DefaultPolicy");
 
             app.UseAuthorization();
 

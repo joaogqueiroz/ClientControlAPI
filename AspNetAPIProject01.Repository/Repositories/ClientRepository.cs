@@ -85,5 +85,18 @@ namespace AspNetAPIProject01.Data.Repositories
                 return connection.Query<Client>(query, new { clientID }).FirstOrDefault();
             }
         }
+
+        public List<Client> Read(DateTime startDate, DateTime finishDate)
+        {
+            var query = @"
+                SELECT * FROM CLIENT_TB
+                WHERE   REGISTRATIONDATE BETWEEN @startDate AND @finishDate
+                ORDER BY NAME
+            ";
+            using (var connection = new SqlConnection(_connectionstring))
+            {
+                return connection.Query<Client>(query, new { startDate, finishDate }).ToList();
+            }
+        }
     }
 }

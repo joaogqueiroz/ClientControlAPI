@@ -1,4 +1,6 @@
-﻿using AspNetAPIProject01.Data.Entities;
+﻿using ApsNetAPIProject01.Reports.Data;
+using ApsNetAPIProject01.Reports.Pdfs;
+using AspNetAPIProject01.Data.Entities;
 using AspNetAPIProject01.Data.Interfaces;
 using AspNetAPIProject01.Services.Models;
 using Microsoft.AspNetCore.Http;
@@ -39,7 +41,7 @@ namespace AspNetAPIProject01.Services.Controllers
             catch (Exception e)
             {
                 //HTTP status 500 - Internal Server Error
-                return StatusCode(500);
+                return StatusCode(500, $"{e.Message}");
             }
         }
         [HttpGet]
@@ -56,7 +58,7 @@ namespace AspNetAPIProject01.Services.Controllers
             catch (Exception e)
             {
                 //HTTP status 500 - Internal Server Error
-                return StatusCode(500);
+                return StatusCode(500, $"{e.Message}");
             }
         }
         [HttpPut]
@@ -87,7 +89,7 @@ namespace AspNetAPIProject01.Services.Controllers
             catch (Exception e)
             {
                 //HTTP status 500 - Internal Server Error
-                return StatusCode(500);
+                return StatusCode(500, $"{e.Message}");
             }
         }
         [HttpDelete("{clientID:Guid}")]
@@ -115,7 +117,7 @@ namespace AspNetAPIProject01.Services.Controllers
             catch (Exception e)
             {
                 //HTTP status 500 - Internal Server Error
-                return StatusCode(500);
+                return StatusCode(500, $"{e.Message}");
             }
         }        
         [HttpGet("{clientID:Guid}")]
@@ -138,8 +140,57 @@ namespace AspNetAPIProject01.Services.Controllers
             catch (Exception e)
             {
                 //HTTP status 500 - Internal Server Error
-                return StatusCode(500);
+                return StatusCode(500, $"{e.Message}");
             }
         }
+
+        [HttpGet]
+        [Route("DatesSummation")]
+        public IActionResult GetDatesSummation()
+        {
+            try
+            {
+                var clients = _clientRepository.Read();
+                var data = clients.Select(c =>
+                   new
+                   {
+                       ClientName = c.Name,
+                       ClientRegistration = c.RegistrationDate.ToString("MM/dd/yyyy")
+                   }).ToList();
+
+                var result = data.GroupBy(c => c.ClientRegistration).Select(
+                    g => new { RegistrationDate = g.Key, Amount = g.Count() }).ToList();
+                   return Ok(result);
+            }
+            catch (Exception e)
+            {
+                //HTTP status 500 - Internal Server Error
+                return StatusCode(500, $"{e.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("ClientReport/{startDate}/{finishDate}")]
+        public IActionResult GetClientReport(DateTime startDate, DateTime finishDate)
+        {
+            try
+            {
+                var data = new ClientReportData();
+                data.GenerationDate = DateTime.Now;
+                data.Clients = _clientRepository.Read(startDate, finishDate);
+
+                //Creating PDF file
+                var report = new ClientReportPdf();
+                var pdf = report.ReportGenerator(data);
+
+                return File(pdf, "application/pdf");
+            }
+            catch (Exception e)
+            {
+                //HTTP status 500 - Internal Server Error
+                return StatusCode(500, $"{e.Message}");
+            }
+        }
+
     }
 }
